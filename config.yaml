@@ -1,0 +1,10 @@
+path: C:/Users/Shubham.Luxkar/Documents/Training/invoiceTraining/data # dataset root dir
+train: images/train
+val: images/train
+# Classes
+names:
+  0 : Order_Number
+  1 : Order_Date
+  2 : Delivery_Date
+  3 : Delivery_Address
+  4 : Product_Code
