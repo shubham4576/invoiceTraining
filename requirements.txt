@@ -8,3 +8,4 @@ pyYAML
 requests
 tqdm
 ultralytics~=8.2.42
+torch~=2.3.1
