@@ -14,7 +14,7 @@ def labelme2yolo(labelme_json, output_dir):
     # Create YOLO annotation file
     yolo_annotations = []
     for shape in shapes:
-        label = shape['labels']
+        label = shape['label']
         points = shape['points']
 
         if shape['shape_type'] != 'rectangle':
@@ -38,7 +38,8 @@ def labelme2yolo(labelme_json, output_dir):
 
         # Assuming labels mapping is needed, define a class list
         # You may need to adjust the class list based on your labels
-        class_list = ["Order_Number", "Order_Date", "Delivery_Date", "Delivery_Address", "Product_Code"]  # Example class list
+        class_list = ["product_name", "product_code", "total", "tax", "net", "delivery_date", "order_date"
+                      , "delivery_address", "company_name", "ordered_by", "billing_address"]  # Example class list
         class_id = class_list.index(label)
 
         yolo_annotation = f"{class_id} {center_x} {center_y} {box_width} {box_height}"
