@@ -1,23 +1,24 @@
+import os
 from ultralytics import YOLO
 
 model = YOLO("runs/detect/train/weights/best.pt")
 
 # model.train(data="config.yaml", epochs=30)
 
-# Run batched inference on a list of images
-results = model(["invoiceImages/invoiceImg_02.jpg"], stream=True, )  # return a generator of Results objects
-names = model.names
-# Process results generator
-for result in results:
-    for c in result.boxes.cls:
-        print(names[int(c)])
-    boxes = result.boxes  # Boxes object for bounding box outputs
-    masks = result.masks  # Masks object for segmentation masks outputs
-    keypoints = result.keypoints  # Keypoints object for pose outputs
-    probs = result.probs  # Probs object for classification outputs
-    obb = result.obb  # Oriented boxes object for OBB outputs
-    with open("coordinates.txt", "w") as file:
-        file.write(f"""boxes = {boxes}\n------------\n
-                   """)
-        result.show()  # display to screen
-        result.save(filename="result.jpg")  # save to disk
+image_paths = ["invoiceImages/invoiceImg_02.jpg"]  # Replace with your list of image paths
+
+# Perform batched inference on the list of images
+results = model.predict(image_paths, stream=True)  # return a generator of Results objects
+
+for image_path in image_paths:
+    image_name = os.path.splitext(os.path.basename(image_path))[0]
+    info_filename = f"Prediction/{image_name}_information.txt"
+
+    # Save information about 'boxes' to the specified file
+    with open(info_filename, "w") as file:
+        for result in results:
+            file.write(str(result.boxes))
+    print(f"Information about 'boxes' attribute written to {info_filename}")
+
+print("Information files saved successfully.")
+

@@ -76,7 +76,7 @@ def get_json_filename(image_path):
     return f"{base_name}_extracted_text.json"
 
 
-bounding_boxes_file = 'coordinates.txt'
+bounding_boxes_file = 'Prediction/invoiceImg_02_information.txt'
 # Example usage
 image_path = 'result.jpg'
 
