@@ -1,0 +1,42 @@
+{
+    "order_details": {
+        "po_number": "JFB-PO-OOO15058",
+        "order_date": "03-APR-2024",
+        "delivery_date": "05-APR-2024",
+        "ordered_by": "Suhail Ediyanam Veed",
+        "bill_to": "Jumeirah F and B Concepts LLC\nLevel 1 Tower 4, Dubai Wharf(Jaddaf Waterfront Area) P O Box 123311\nDubai",
+        "buyer_email": "suhail.veed@dhgroupservices.com",
+        "buyer_name": "Suhail Ediyanam Veed",
+        "po_total_aed": "901.12",
+        "tax_total_aed": "45.06",
+        "grand_total_aed": "946.18",
+        "requestor_name": "Jeremiah Nyahe Kimani",
+        "requestor_email": "jeremiah.kimani@jumeirah.com"
+    },
+    "product_details": {
+        "items": [
+            {
+                "product_group": "Food",
+                "product_code": "Fl105516",
+                "uom": "PACKA",
+                "product_name": "Egg Liquid Yolk Pasteurised EifiX Weisenhof Chilled",
+                "unit_price_aed": "55.00",
+                "tax_rate": "5.00",
+                "amount_aed": "110.00",
+                "quantity": "2",
+                "line_total_aed": "115.50"
+            },
+            {
+                "product_group": "Food",
+                "product_code": "F|115272",
+                "uom": "CASE",
+                "product_name": "French Fries Grade A Frozen 9*9mm McCain",
+                "unit_price_aed": "98.89",
+                "tax_rate": "5.00",
+                "amount_aed": "791.12",
+                "quantity": "8",
+                "line_total_aed": "830.68"
+            }
+        ]
+    }
+}
