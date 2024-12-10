@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+import threading
 import time
 
 import schedule
@@ -40,9 +41,6 @@ def watch_mail_pdfs_folder():
 
 
 schedule.every(10).seconds.do(run_email_fetch_test)
-
-# Run the watchdog in a separate thread
-import threading
 
 thread = threading.Thread(target=watch_mail_pdfs_folder)
 thread.daemon = True  # Set as daemon so it exits when main thread exits

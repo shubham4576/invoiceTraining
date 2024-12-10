@@ -1,8 +1,17 @@
-from langchain.chains import create_extraction_chain
-from langchain_experimental.llms.ollama_functions import OllamaFunctions
-from schema_structure.schemas import *
+from langchain.chains.openai_functions.extraction import create_extraction_chain
+from langchain_ollama import ChatOllama
 
-model = OllamaFunctions(model="llama3.1:latest", tempurature=0)
+from schema_structure.schemas import (
+    get_product_data_schema,
+    get_product_item_schema,
+    get_supplier_data_schema,
+    get_user_data_schema,
+)
+
+model = ChatOllama(
+    model="llama3.1:latest",
+    tempurature=0,
+)
 
 
 def combine_json_objects(*args):
@@ -23,7 +32,9 @@ def combine_json_objects(*args):
             for item in arg:
                 if isinstance(item, dict):
                     for key, value in item.items():
-                        if key in combined_data and isinstance(combined_data[key], list):
+                        if key in combined_data and isinstance(
+                            combined_data[key], list
+                        ):
                             combined_data[key].append(value)
                         elif key in combined_data:
                             combined_data[key] = [combined_data[key], value]

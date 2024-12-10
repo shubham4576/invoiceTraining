@@ -1,14 +1,15 @@
+import json
+import os
+
 import pdf2image
 import pytesseract
-import os
-import json
 from requests.exceptions import ConnectionError
 
 from excel_tools.excel_lookup import lookup_and_map_json
 from generateJson.PO_json import gen_json
 
 
-def read_pdf(file_path):
+def read_pdf(file_path: str) -> str:
     images = pdf2image.convert_from_path(file_path, dpi=300, grayscale=True)
     extracted_text = ""
     for image in images[:1]:
@@ -32,7 +33,9 @@ def process_pdfs_in_folder(input_folder, output_folder):
         pdf_path = os.path.join(input_folder, pdf_file)
         pdf_text = read_pdf(pdf_path)
 
-        output_file_path = os.path.join(output_folder, f"{os.path.splitext(pdf_file)[0]}_details.txt")
+        output_file_path = os.path.join(
+            output_folder, f"{os.path.splitext(pdf_file)[0]}_details.txt"
+        )
         if os.path.exists(output_file_path):
             with open(output_file_path, "r") as json_file:
                 json_content = json.load(json_file)
@@ -43,8 +46,10 @@ def process_pdfs_in_folder(input_folder, output_folder):
             json_content = json.dumps(gen_json(pdf_text), indent=4)
             # print(jsoon)
             # Json to Excel by Mapping
-            dummy_data_path = r'C:\Users\Shubham.Luxkar\Documents\Training\InvoicePOC\dummy_data.xlsx'
-            output_path = r'C:\Users\Shubham.Luxkar\Documents\Training\InvoicePOC\output_mapped.xlsx'
+            dummy_data_path = (
+                r"C:\Users\Shubham.Luxkar\Documents\Training\InvoicePOC\dummy_data.xlsx"
+            )
+            output_path = r"C:\Users\Shubham.Luxkar\Documents\Training\InvoicePOC\output_mapped.xlsx"
 
             with open(output_file_path, "w") as txt_file:
                 # Call the function with the provided JSON input and file paths
@@ -52,14 +57,15 @@ def process_pdfs_in_folder(input_folder, output_folder):
                 txt_file.write(json_content)
 
         except ConnectionError:
-            raise ConnectionError(f"Failed to connect to the Ollama model server for file: {pdf_file}. Please make "
-                                  f"sure the server is running and try again.")
+            raise ConnectionError(
+                f"Failed to connect to the Ollama model server for file: {pdf_file}. Please make "
+                f"sure the server is running and try again."
+            )
         except KeyError as e:
-            raise KeyError(f"Key error for file: {pdf_file}: {e}. Please check the input text and schema.")
+            raise KeyError(
+                f"Key error for file: {pdf_file}: {e}. Please check the input text and schema."
+            )
         except Exception as e:
             raise Exception(f"An error occurred for file: {pdf_file}: {e}")
 
     return processed_files
-
-
-
