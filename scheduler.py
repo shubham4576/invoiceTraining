@@ -1,29 +1,3 @@
-# import schedule
-# import time
-# import subprocess
-# import sys
-# import os
-#
-#
-# def run_email_fetch_test():
-#     script_path = os.path.join('email_tools', 'email_fetch.py')
-#     subprocess.Popen([sys.executable, script_path])
-#
-#
-# def run_main():
-#     subprocess.Popen([sys.executable, 'main.py'])
-#
-#
-# schedule.every(10).seconds.do(run_email_fetch_test)
-# schedule.every(5).seconds.do(run_main)
-#
-# try:
-#     while True:
-#         schedule.run_pending()
-#         time.sleep(1)
-# except KeyboardInterrupt:
-#     print("Program interrupted. Exiting gracefully...")
-
 import schedule
 import time
 import subprocess
